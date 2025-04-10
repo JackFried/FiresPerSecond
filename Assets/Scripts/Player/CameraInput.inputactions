@@ -1,0 +1,98 @@
+{
+    "name": "CameraInput",
+    "maps": [
+        {
+            "name": "CameraInput",
+            "id": "eaeb1809-a624-4bcb-ae56-e17c301110a9",
+            "actions": [
+                {
+                    "name": "Horizontal",
+                    "type": "Value",
+                    "id": "bb01380b-e512-448d-91b9-904561f1111f",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Vertical",
+                    "type": "Value",
+                    "id": "0358cd15-0c02-4e50-9226-f1471f8ed3eb",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "LeftRight",
+                    "id": "3019b47b-3432-4bfa-89ff-49c045411ce9",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "a6c68308-566a-4f57-b43d-9d8e2c77a704",
+                    "path": "<Mouse>/delta/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "81b582ec-138e-48b9-874b-f24e2a873b31",
+                    "path": "<Mouse>/delta/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "UpDown",
+                    "id": "0c5ae701-b513-4b8d-9648-c2af90deed68",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f73f9010-adc2-45ee-881c-c1b50c449854",
+                    "path": "<Mouse>/delta/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3c0bc994-decc-43b5-977a-d0f16fd8e09f",
+                    "path": "<Mouse>/delta/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
