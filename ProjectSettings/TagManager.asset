@@ -13,6 +13,7 @@ TagManager:
   - PlayerBody
   - PersistentData
   - Timer
+  - SuperRangedEnemy
   layers:
   - Default
   - TransparentFX

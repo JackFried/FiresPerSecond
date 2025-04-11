@@ -67,6 +67,14 @@ public class BulletScript : MonoBehaviour
             Instantiate(hitEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
+
+        if (other.gameObject.CompareTag("SuperRangedEnemy")) //Damages and destroys when hitting a super ranged enemy
+        {
+            other.gameObject.GetComponent<SuperRangedEnemy>().CurrentHp -= damage;
+
+            Instantiate(hitEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>

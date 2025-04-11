@@ -25,7 +25,6 @@ public class TeleporterScript : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerBody"))
         {
             player.transform.position = toLocation.transform.position;
-            Debug.Log(player.transform.position);
         }
     }
 }
