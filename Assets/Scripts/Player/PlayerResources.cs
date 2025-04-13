@@ -130,10 +130,8 @@ public class PlayerResources : MonoBehaviour
         //Controls losing and restarting the level
         if (CurrentHp <= 0)
         {
-            //Deletes persistent data object
-            Destroy(persistentData);
             //Reloads the current scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("LevelLose");
         }
 
         //Controls iframe data (goes down on a per-second basis)

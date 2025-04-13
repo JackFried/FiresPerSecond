@@ -19,7 +19,10 @@ public class PersistentData : MonoBehaviour
 
     private GameObject timer;
 
+    [SerializeField] private string currentLevel;
+
     public float BestTime { get => bestTime; set => bestTime = value; }
+    public string CurrentLevel { get => currentLevel; set => currentLevel = value; }
 
 
     /// <summary>
@@ -43,7 +46,7 @@ public class PersistentData : MonoBehaviour
     /// </summary>
     void Update()
     {
-        //If in the level scenes, find the timer and keep track of the current time
+        //If in the level scenes, find the timer and keep track of the current time + current level
         if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" ||
             SceneManager.GetActiveScene().name == "Level3")
         {
@@ -53,6 +56,7 @@ public class PersistentData : MonoBehaviour
                 timerController = timer.GetComponent<TimerController>();
             }
 
+            CurrentLevel = SceneManager.GetActiveScene().name;
             BestTime = timerController.CurrentTime;
         }
         else //If outside of the levels scenes, destroy self

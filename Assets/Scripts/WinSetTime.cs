@@ -21,9 +21,9 @@ public class WinSetTime : MonoBehaviour
 
 
     /// <summary>
-    /// The code being called on start
+    /// The code being called on the first frame
     /// </summary>
-    void Start()
+    void Awake()
     {
         //Finds the persistent data object, to get the previous level time
         dataObject = GameObject.FindGameObjectWithTag("PersistentData");

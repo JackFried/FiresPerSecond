@@ -12,18 +12,34 @@ using UnityEngine.SceneManagement;
 public class MenuScript : MonoBehaviour
 {
     //Setting variables
+    [SerializeField] private bool isMainMenu;
     [SerializeField] private bool cursorVisible;
+
+    [SerializeField] private string thisLevel;
+
+    private GameObject dataObject;
+    private PersistentData persistentData;
 
 
     /// <summary>
-    /// Unlocks the cursor and shows it on start
+    /// Called on the first frame
     /// </summary>
-    void Start()
+    void Awake()
     {
+        //Unlocks the cursor and shows it
         if (cursorVisible == true)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+
+        if (isMainMenu == false)
+        {
+            //Finds the persistent data object, to get the previous level time
+            dataObject = GameObject.FindGameObjectWithTag("PersistentData");
+            persistentData = dataObject.GetComponent<PersistentData>();
+
+            thisLevel = persistentData.CurrentLevel;
         }
     }
 
@@ -34,6 +50,29 @@ public class MenuScript : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    /// <summary>
+    /// Replays the current level, using the persistent data object
+    /// </summary>
+    public void ReplayLevel()
+    {
+        SceneManager.LoadScene(thisLevel);
+    }
+
+    /// <summary>
+    /// Loads the next level, using the persistent data object
+    /// </summary>
+    public void NextLevel()
+    {
+        if (thisLevel == "Level1")
+        {
+            SceneManager.LoadScene("Level2");
+        }
+        else if (thisLevel == "Level2")
+        {
+            SceneManager.LoadScene("Level3");
+        }
     }
 
     /// <summary>
