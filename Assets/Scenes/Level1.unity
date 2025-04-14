@@ -17593,6 +17593,7 @@ MonoBehaviour:
   bestTime: 0
   timerController: {fileID: 0}
   Instance: {fileID: 0}
+  currentLevel: 
 --- !u!4 &1181085528
 Transform:
   m_ObjectHideFlags: 0
