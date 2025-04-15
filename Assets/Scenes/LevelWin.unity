@@ -257,7 +257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level Complete
+  m_text: Stage Complete
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11c632eb337122f4689f6e653eaa0616, type: 2}
   m_sharedMaterial: {fileID: -1044519088224497055, guid: 11c632eb337122f4689f6e653eaa0616, type: 2}
@@ -982,7 +982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next level
+  m_text: Next Stage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11c632eb337122f4689f6e653eaa0616, type: 2}
   m_sharedMaterial: {fileID: -1044519088224497055, guid: 11c632eb337122f4689f6e653eaa0616, type: 2}
