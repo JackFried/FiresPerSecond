@@ -204,6 +204,8 @@ MonoBehaviour:
   fireCount: 3
   voleyDelay: 0.2
   destroyEffect: {fileID: 6316239596588784208, guid: 4f3740a8b59c3304c8d6174c1ebb9a40, type: 3}
+  shootSfx: {fileID: 8300000, guid: 636bc8a4d1b467d45bd27367facef789, type: 3}
+  deathSfx: {fileID: 8300000, guid: ade1398c19e75f448ad98aa145fcf898, type: 3}
 --- !u!54 &7617754139120295074
 Rigidbody:
   m_ObjectHideFlags: 0

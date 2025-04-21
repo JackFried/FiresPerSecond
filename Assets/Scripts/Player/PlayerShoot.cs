@@ -42,6 +42,8 @@ public class PlayerShoot : MonoBehaviour
 
     private InputAction shoot;
 
+    [SerializeField] private AudioClip shootSfx;
+
 
     /// <summary>
     /// The code to be called on initial object creation
@@ -109,6 +111,8 @@ public class PlayerShoot : MonoBehaviour
                 {
                     rb.AddForce(-referenceRotation.transform.forward * pushForce, ForceMode.Impulse);
                 }
+
+                AudioSource.PlayClipAtPoint(shootSfx, transform.position, 1f);
             }
         }
     }

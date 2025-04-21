@@ -36,6 +36,8 @@ public class PlayerResources : MonoBehaviour
     [SerializeField] private float iframeSecOnDamage;
     [SerializeField] private float hpFlashDelay;
 
+    [SerializeField] private AudioClip hurtSfx;
+
     private GameObject persistentData;
 
 
@@ -161,6 +163,7 @@ public class PlayerResources : MonoBehaviour
         {
             CurrentHp -= 1;
             currentIframes = iframeSecOnDamage;
+            AudioSource.PlayClipAtPoint(hurtSfx, transform.position, 1f);
             StartCoroutine(UIFlash()); //Run iframe display animation
         }
     }

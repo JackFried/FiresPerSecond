@@ -43,6 +43,13 @@ public class PlayerMovement : MonoBehaviour
     private float initialFov;
     private float targetFov;
 
+    //Audio clips
+    [SerializeField] private AudioClip jumpSfx;
+    [SerializeField] private AudioClip healSfx;
+
+    private GameObject overlay;
+    private PauseMenu pauseMenu;
+
     private PlayerResources playerResources;
 
     
@@ -60,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
 
         //Finds the resources script
         playerResources = gameObject.GetComponent<PlayerResources>();
+
+        //Finds the pause menu script through the HUD object
+        overlay = GameObject.FindGameObjectWithTag("HUD");
+        pauseMenu = overlay.GetComponent<PauseMenu>();
 
         //Sets the starting FOV
         initialFov = mainCamera.fieldOfView;
@@ -94,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
             //Apply upwards force
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
+            AudioSource.PlayClipAtPoint(jumpSfx, transform.position, 1f);
+
             canJump = false;
         }
     }
@@ -119,18 +132,21 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
             canJump = true; //When on the ground, also reset the jump
 
-            
-            //FOV stuff (grounded)
-            //If FOV is above the initial value, rapidly decrease it based on the over-time speed
-            if (currentFovChange > 0)
+
+            if (pauseMenu.IsPaused == false)
             {
-                currentFovChange -= fovChangeOT * fovReturnMult;
+                //FOV stuff (grounded)
+                //If FOV is above the initial value, rapidly decrease it based on the over-time speed
+                if (currentFovChange > 0)
+                {
+                    currentFovChange -= fovChangeOT * fovReturnMult;
+                }
+                else
+                {
+                    currentFovChange = 0;
+                }
+                mainCamera.fieldOfView = (initialFov + currentFovChange);
             }
-            else
-            {
-                currentFovChange = 0;
-            }
-            mainCamera.fieldOfView = (initialFov + currentFovChange);
         }
         else
         {
@@ -139,30 +155,33 @@ public class PlayerMovement : MonoBehaviour
             canJump = false; //When off the ground, disable jumping
 
 
-            //FOV stuff (mid-air)
-            //Calculates total current horizontal magnitude, used as a modifier for FOV change
-            float playerMoveAverage = Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.z * rb.velocity.z);
+            if (pauseMenu.IsPaused == false)
+            {
+                //FOV stuff (mid-air)
+                //Calculates total current horizontal magnitude, used as a modifier for FOV change
+                float playerMoveAverage = Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.z * rb.velocity.z);
 
-            //As player move speed increases, so does the target FOV change (to a cap)
-            if (targetFov > maxFovChange)
-            {
-                targetFov = maxFovChange;
-            }
-            else
-            {
-                targetFov = (playerMoveAverage * fovTargetScale);
-            }
+                //As player move speed increases, so does the target FOV change (to a cap)
+                if (targetFov > maxFovChange)
+                {
+                    targetFov = maxFovChange;
+                }
+                else
+                {
+                    targetFov = (playerMoveAverage * fovTargetScale);
+                }
 
-            //Have the FOV change over time based on a predetermined rate, to eventually match the target FOV
-            if (currentFovChange < targetFov)
-            {
-                currentFovChange += fovChangeOT;
+                //Have the FOV change over time based on a predetermined rate, to eventually match the target FOV
+                if (currentFovChange < targetFov)
+                {
+                    currentFovChange += fovChangeOT;
+                }
+                else if (currentFovChange > targetFov)
+                {
+                    currentFovChange -= fovChangeOT;
+                }
+                mainCamera.fieldOfView = (initialFov + currentFovChange);
             }
-            else if (currentFovChange > targetFov)
-            {
-                currentFovChange -= fovChangeOT;
-            }
-            mainCamera.fieldOfView = (initialFov + currentFovChange);
         }
     }
 
@@ -236,6 +255,7 @@ public class PlayerMovement : MonoBehaviour
             if (playerResources.CurrentHp < 3) //If not at max HP, restore 1 health and destroy
             {
                 playerResources.CurrentHp += 1;
+                AudioSource.PlayClipAtPoint(healSfx, transform.position, 1f);
                 Destroy(other.gameObject);
             }
         }

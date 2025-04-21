@@ -119335,6 +119335,10 @@ PrefabInstance:
       propertyPath: enemyCount
       value: 
       objectReference: {fileID: 2018881402}
+    - target: {fileID: 6670792937736379161, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c56921e07ab85845ae09befb04f1df9, type: 3}
     - target: {fileID: 8687009618774752629, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
       propertyPath: m_RootOrder
       value: 1

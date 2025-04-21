@@ -17,6 +17,8 @@ public class ReloadScript : MonoBehaviour
 
     [SerializeField] private float reloadTime;
 
+    [SerializeField] private AudioClip reloadSfx;
+
 
     /// <summary>
     /// Starts one reload on spawn
@@ -39,6 +41,7 @@ public class ReloadScript : MonoBehaviour
     {
         yield return new WaitForSeconds(reloadTime);
         playerResources.CurrentAmmo += 1;
+        AudioSource.PlayClipAtPoint(reloadSfx, playerObject.transform.position, 0.5f);
         Destroy(gameObject);
     }
 }

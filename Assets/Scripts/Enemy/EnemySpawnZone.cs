@@ -19,6 +19,7 @@ public class EnemySpawnZone : MonoBehaviour
     [SerializeField] private float wallDelay;
 
     [SerializeField] private GameObject spawnEffect;
+    [SerializeField] private AudioClip spawnSfx;
 
     private bool isEnabled;
 
@@ -69,6 +70,7 @@ public class EnemySpawnZone : MonoBehaviour
             {
                 EnableEnemies();
                 StartCoroutine(EnableWalls());
+                AudioSource.PlayClipAtPoint(spawnSfx, other.gameObject.transform.position, 1f);
                 isEnabled = true;
             }
         }

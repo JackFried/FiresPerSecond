@@ -158,6 +158,7 @@ MonoBehaviour:
   startHp: 4
   agent: {fileID: 4109486479840451398}
   destroyEffect: {fileID: 6316239596588784208, guid: 4f3740a8b59c3304c8d6174c1ebb9a40, type: 3}
+  deathSfx: {fileID: 8300000, guid: ade1398c19e75f448ad98aa145fcf898, type: 3}
 --- !u!195 &4109486479840451398
 NavMeshAgent:
   m_ObjectHideFlags: 0

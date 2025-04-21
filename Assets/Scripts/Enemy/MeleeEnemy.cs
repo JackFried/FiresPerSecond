@@ -22,6 +22,7 @@ public class MeleeEnemy : MonoBehaviour
     private PlayerResources playerResources;
 
     [SerializeField] private GameObject destroyEffect;
+    [SerializeField] private AudioClip deathSfx;
 
     public int CurrentHp { get => currentHp; set => currentHp = value; }
 
@@ -50,6 +51,7 @@ public class MeleeEnemy : MonoBehaviour
             playerResources.TotalEnemies -= 1;
             GameObject effect = Instantiate(destroyEffect);
             effect.transform.position = transform.position;
+            AudioSource.PlayClipAtPoint(deathSfx, transform.position, 1f);
             Destroy(gameObject);
         }
         else

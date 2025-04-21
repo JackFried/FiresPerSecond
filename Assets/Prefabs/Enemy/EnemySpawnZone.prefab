@@ -122,3 +122,4 @@ MonoBehaviour:
   wallList: []
   wallDelay: 0
   spawnEffect: {fileID: 6316239596588784208, guid: 4f3740a8b59c3304c8d6174c1ebb9a40, type: 3}
+  spawnSfx: {fileID: 8300000, guid: 8fc572778d08dff45a634ebb235f98a3, type: 3}

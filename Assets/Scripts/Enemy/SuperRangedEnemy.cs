@@ -23,6 +23,8 @@ public class SuperRangedEnemy : MonoBehaviour
     private PlayerResources playerResources;
 
     [SerializeField] private GameObject destroyEffect;
+    [SerializeField] private AudioClip shootSfx;
+    [SerializeField] private AudioClip deathSfx;
 
     public int CurrentHp { get => currentHp; set => currentHp = value; }
 
@@ -54,6 +56,7 @@ public class SuperRangedEnemy : MonoBehaviour
             playerResources.TotalEnemies -= 1;
             GameObject effect = Instantiate(destroyEffect);
             effect.transform.position = transform.position;
+            AudioSource.PlayClipAtPoint(deathSfx, transform.position, 1f);
             Destroy(gameObject);
         }
 
@@ -72,6 +75,7 @@ public class SuperRangedEnemy : MonoBehaviour
         for (int i = 0; i < fireCount; i++)
         {
             Instantiate(bullet, transform.position, transform.rotation);
+            AudioSource.PlayClipAtPoint(shootSfx, transform.position, 1f);
             yield return new WaitForSeconds(voleyDelay);
         }
 

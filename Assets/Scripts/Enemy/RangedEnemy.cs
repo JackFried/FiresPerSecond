@@ -21,6 +21,8 @@ public class RangedEnemy : MonoBehaviour
     private PlayerResources playerResources;
 
     [SerializeField] private GameObject destroyEffect;
+    [SerializeField] private AudioClip shootSfx;
+    [SerializeField] private AudioClip deathSfx;
 
     public int CurrentHp { get => currentHp; set => currentHp = value; }
 
@@ -52,6 +54,7 @@ public class RangedEnemy : MonoBehaviour
             playerResources.TotalEnemies -= 1;
             GameObject effect = Instantiate(destroyEffect);
             effect.transform.position = transform.position;
+            AudioSource.PlayClipAtPoint(deathSfx, transform.position, 1f);
             Destroy(gameObject);
         }
 
@@ -63,6 +66,7 @@ public class RangedEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(fireDelay);
         Instantiate(bullet, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(shootSfx, transform.position, 1f);
 
         //Loops function
         StartCoroutine(FireBullet());
