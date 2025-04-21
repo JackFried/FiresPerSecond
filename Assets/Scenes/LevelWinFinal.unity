@@ -439,7 +439,6 @@ GameObject:
   - component: {fileID: 427650551}
   - component: {fileID: 427650554}
   - component: {fileID: 427650553}
-  - component: {fileID: 427650552}
   m_Layer: 5
   m_Name: CongratsText
   m_TagString: Untagged
@@ -467,19 +466,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 11.907991}
   m_SizeDelta: {x: 534.8076, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &427650552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427650550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea31b71f0ace9ab4e9c6daeb6168de5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeText: {fileID: 0}
 --- !u!114 &427650553
 MonoBehaviour:
   m_ObjectHideFlags: 0
