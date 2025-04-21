@@ -21,8 +21,11 @@ public class PersistentData : MonoBehaviour
 
     [SerializeField] private string currentLevel;
 
+    private bool canDelete;
+
     public float BestTime { get => bestTime; set => bestTime = value; }
     public string CurrentLevel { get => currentLevel; set => currentLevel = value; }
+    public bool CanDelete { get => canDelete; set => canDelete = value; }
 
 
     /// <summary>
@@ -30,6 +33,9 @@ public class PersistentData : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        //Prevents self from being destroyed until all data is properly taken from it
+        canDelete = false;
+
         //If an instance of this already exists, delete self
         if (Instance != null)
         {
@@ -61,7 +67,10 @@ public class PersistentData : MonoBehaviour
         }
         else //If outside of the levels scenes, destroy self
         {
-            Destroy(gameObject);
+            if (canDelete == true)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

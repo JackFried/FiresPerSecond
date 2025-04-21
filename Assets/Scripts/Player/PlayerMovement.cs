@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     private Vector3 playerMovement;
     private Vector3 moveDir;
+    [SerializeField] private Camera mainCamera;
 
     //Drag-related variables
     [SerializeField] private float playerHeight;
@@ -32,6 +33,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float airMultiplier;
     private bool canJump;
+
+    //FOV change variables
+    [SerializeField] private float maxFovChange;
+    [SerializeField] private float fovChangeOT;
+    [SerializeField] private float fovTargetScale;
+    [SerializeField] private float fovReturnMult;
+    private float currentFovChange;
+    private float initialFov;
+    private float targetFov;
 
     private PlayerResources playerResources;
 
@@ -50,6 +60,11 @@ public class PlayerMovement : MonoBehaviour
 
         //Finds the resources script
         playerResources = gameObject.GetComponent<PlayerResources>();
+
+        //Sets the starting FOV
+        initialFov = mainCamera.fieldOfView;
+        targetFov = 0;
+        currentFovChange = 0;
     }
 
 
@@ -97,18 +112,57 @@ public class PlayerMovement : MonoBehaviour
         //Check for ground using raycasting, using half the player's height plus a little more
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
 
-        //Drag control (if on the ground, apply the drag; otherwise don't)
+        //Air-related processes
         if (IsGrounded == true)
         {
+            //Drag control (if on the ground, apply the drag; otherwise don't)
             rb.drag = groundDrag;
-
             canJump = true; //When on the ground, also reset the jump
+
+            
+            //FOV stuff (grounded)
+            //If FOV is above the initial value, rapidly decrease it based on the over-time speed
+            if (currentFovChange > 0)
+            {
+                currentFovChange -= fovChangeOT * fovReturnMult;
+            }
+            else
+            {
+                currentFovChange = 0;
+            }
+            mainCamera.fieldOfView = (initialFov + currentFovChange);
         }
         else
         {
+            //Drag control (if on the ground, apply the drag; otherwise don't)
             rb.drag = 0;
-
             canJump = false; //When off the ground, disable jumping
+
+
+            //FOV stuff (mid-air)
+            //Calculates total current horizontal magnitude, used as a modifier for FOV change
+            float playerMoveAverage = Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.z * rb.velocity.z);
+
+            //As player move speed increases, so does the target FOV change (to a cap)
+            if (targetFov > maxFovChange)
+            {
+                targetFov = maxFovChange;
+            }
+            else
+            {
+                targetFov = (playerMoveAverage * fovTargetScale);
+            }
+
+            //Have the FOV change over time based on a predetermined rate, to eventually match the target FOV
+            if (currentFovChange < targetFov)
+            {
+                currentFovChange += fovChangeOT;
+            }
+            else if (currentFovChange > targetFov)
+            {
+                currentFovChange -= fovChangeOT;
+            }
+            mainCamera.fieldOfView = (initialFov + currentFovChange);
         }
     }
 
@@ -164,6 +218,31 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("WinOn"))
         {
             SceneManager.LoadScene("LevelWin");
+        }
+        else if (collision.gameObject.CompareTag("FinalWin")) //Win platform on Stage 3
+        {
+            SceneManager.LoadScene("LevelWinFinal");
+        }
+    }
+
+    /// <summary>
+    /// Controls what happens when the player interacts with a given trigger
+    /// </summary>
+    /// <param name="other"> The target collision </param>
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Heart")) //Heart Pick-up (heals)
+        {
+            if (playerResources.CurrentHp < 3) //If not at max HP, restore 1 health and destroy
+            {
+                playerResources.CurrentHp += 1;
+                Destroy(other.gameObject);
+            }
+        }
+
+        if (other.gameObject.CompareTag("Instakill")) //Out-of-bounds instakill
+        {
+            playerResources.CurrentHp = 0;
         }
     }
 }

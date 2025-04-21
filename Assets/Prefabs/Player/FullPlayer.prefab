@@ -295,6 +295,7 @@ MonoBehaviour:
   moveSpeed: 85
   orientation: {fileID: 8203696430853354014}
   rb: {fileID: 3035365787133985649}
+  mainCamera: {fileID: 3782502723074679367}
   playerHeight: 2
   groundMask:
     serializedVersion: 2
@@ -302,6 +303,10 @@ MonoBehaviour:
   groundDrag: 8
   jumpForce: 12
   airMultiplier: 0.12
+  maxFovChange: 10
+  fovChangeOT: 0.01
+  fovTargetScale: 0.5
+  fovReturnMult: 8
 --- !u!114 &7688157222492010688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +559,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 8fbdffb56582de140a27a73da6dc38d6, type: 2}
   m_TargetDisplay: 0

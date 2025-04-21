@@ -133,6 +133,10 @@ public class PlayerResources : MonoBehaviour
             //Reloads the current scene
             SceneManager.LoadScene("LevelLose");
         }
+        if (CurrentHp > 3)
+        {
+            CurrentHp = 3;
+        }
 
         //Controls iframe data (goes down on a per-second basis)
         if (currentIframes > 0)

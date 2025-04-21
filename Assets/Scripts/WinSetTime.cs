@@ -36,5 +36,8 @@ public class WinSetTime : MonoBehaviour
         TimeSpan time = TimeSpan.FromSeconds(savedTime);
         //Formats time variable into specified string structure
         timeText.text = time.ToString(@"mm\:ss\:ff");
+
+        //Allows the data object to be destroyed
+        persistentData.CanDelete = true;
     }
 }

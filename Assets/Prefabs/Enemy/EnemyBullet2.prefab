@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 0}
-  speed: 20
+  speed: 35
   deleteTimer: 5
 --- !u!54 &8928296570481902420
 Rigidbody:
