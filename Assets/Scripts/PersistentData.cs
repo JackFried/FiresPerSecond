@@ -6,7 +6,6 @@
 // Brief Description : Carries variables over between scenes.
 *****************************************************************************/
 
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
