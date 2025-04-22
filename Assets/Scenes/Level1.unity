@@ -13017,8 +13017,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Press Escape to pause at any time.
 
-    You can restart the level, quit
-    the level,
+    You can restart the stage, quit
+    the stage,
 
     and check the controls from there.'
   m_isRightToLeft: 0
@@ -30123,7 +30123,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Destroy all enemies in a level and reach the end to progress
+  m_text: 'Destroy all enemies in a stage and reach the end to progress
 
     to the
     next.
