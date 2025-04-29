@@ -9,6 +9,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +34,13 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float randomSpreadAccurate;
     [SerializeField] private int bulletCount;
     [SerializeField] private int bulletCountAccurate;
+
+
     [SerializeField] private float pushForce;
+    private float initialPushForce;
+    [SerializeField] private float pushDecline;
+    [SerializeField] private float pushMin;
+
     [SerializeField] private float horizontalInfluence;
     [SerializeField] private float verticalInfluence;
 
@@ -59,6 +66,21 @@ public class PlayerShoot : MonoBehaviour
         shoot = playerInput.currentActionMap.FindAction("Shoot");
 
         shoot.started += Shoot_started;
+
+        //Setting initial push force variables
+        initialPushForce = pushForce;
+    }
+
+    /// <summary>
+    /// The code to be called every frame
+    /// </summary>
+    private void Update()
+    {
+        //While grounded, reset push strength
+        if (playerMovement.IsGrounded == true)
+        {
+            pushForce = initialPushForce;
+        }
     }
 
     /// <summary>
@@ -86,7 +108,8 @@ public class PlayerShoot : MonoBehaviour
                     //Get random thresholds
                     float randX = referenceRotation.transform.rotation.x + Random.Range(-randomSpread, randomSpread);
                     float randY = referenceRotation.transform.rotation.y + Random.Range(-randomSpread, randomSpread);
-                    Quaternion randomRotation = Quaternion.Euler(randX + verticalInfluence, randY + horizontalInfluence, 0);
+                    Quaternion randomRotation = Quaternion.Euler(randX + verticalInfluence, 
+                        randY + horizontalInfluence, 0);
 
                     //Spawns the bullet with the given angle data
                     Instantiate(bullet, shootLocation.transform.position,
@@ -97,19 +120,32 @@ public class PlayerShoot : MonoBehaviour
                 for (int i = 0; i < bulletCountAccurate; i++)
                 {
                     //Get random thresholds
-                    float randX = referenceRotation.transform.rotation.x + Random.Range(-randomSpreadAccurate, randomSpreadAccurate);
-                    float randY = referenceRotation.transform.rotation.y + Random.Range(-randomSpreadAccurate, randomSpreadAccurate);
-                    Quaternion randomRotation = Quaternion.Euler(randX + verticalInfluence, randY + horizontalInfluence, 0);
+                    float randX = referenceRotation.transform.rotation.x + Random.Range(-randomSpreadAccurate, 
+                        randomSpreadAccurate);
+                    float randY = referenceRotation.transform.rotation.y + Random.Range(-randomSpreadAccurate, 
+                        randomSpreadAccurate);
+                    Quaternion randomRotation = Quaternion.Euler(randX + verticalInfluence, 
+                        randY + horizontalInfluence, 0);
 
                     //Spawns the bullet with the given angle data
                     Instantiate(bullet, shootLocation.transform.position,
                         referenceRotation.transform.rotation * randomRotation);
                 }
 
-                //If not on the ground, give reverse force
                 if (playerMovement.IsGrounded == false)
                 {
+                    //If not on the ground, give reverse force
                     rb.AddForce(-referenceRotation.transform.forward * pushForce, ForceMode.Impulse);
+
+                    //As you shoot while in the air, decrease push force strength
+                    if (pushForce > pushMin)
+                    {
+                        pushForce -= pushDecline;
+                    }
+                    else
+                    {
+                        pushForce = pushMin;
+                    }
                 }
 
                 AudioSource.PlayClipAtPoint(shootSfx, transform.position, 1f);

@@ -2439,7 +2439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 270.94098, y: 1141.4182}
+  m_AnchoredPosition: {x: 270.94098, y: 1141.9194}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &137122685
@@ -2465,7 +2465,14 @@ MonoBehaviour:
   m_text: 'Ammo is infinite, but shots take a moment to recharge.
 
     Fire freely,
-    but skillfully. Creative use of your gun is encouraged.'
+    but skillfully. Creative use of your gun is encouraged.
+
+
+    Repeated use of
+    your gun while in mid-air will make it
+
+    push you less and less until you
+    land again.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11c632eb337122f4689f6e653eaa0616, type: 2}
   m_sharedMaterial: {fileID: -1044519088224497055, guid: 11c632eb337122f4689f6e653eaa0616, type: 2}

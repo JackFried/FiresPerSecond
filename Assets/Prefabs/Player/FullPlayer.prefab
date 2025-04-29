@@ -339,6 +339,8 @@ MonoBehaviour:
   bulletCount: 9
   bulletCountAccurate: 3
   pushForce: 8
+  pushDecline: 0.5
+  pushMin: 2
   horizontalInfluence: -1.5
   verticalInfluence: -1
   shootSfx: {fileID: 8300000, guid: 8cd37a6ce62bd124c9af13ee964310e1, type: 3}

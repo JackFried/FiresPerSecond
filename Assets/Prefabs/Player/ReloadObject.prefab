@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4f7ca6ce6f3cb46925f157f0e054e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadTime: 2
+  reloadTime: 1
   reloadSfx: {fileID: 8300000, guid: c7d601c595c770a4a816887a2677b5d8, type: 3}
