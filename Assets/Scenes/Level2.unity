@@ -111322,6 +111322,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1069296790208586165, guid: b297486099da5a444a97fd0289e72978, type: 3}
+      propertyPath: m_text
+      value: Inner Pipeline
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654670148532816822, guid: b297486099da5a444a97fd0289e72978, type: 3}
+      propertyPath: m_text
+      value: Stage 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7224005414901309662, guid: b297486099da5a444a97fd0289e72978, type: 3}
       propertyPath: m_Pivot.x
       value: 0
