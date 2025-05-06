@@ -18,6 +18,7 @@ public class RangedEnemy : MonoBehaviour
     [SerializeField] private float fireDelay;
 
     private GameObject playerObject;
+    private GameObject playerHead;
     private PlayerResources playerResources;
 
     [SerializeField] private GameObject destroyEffect;
@@ -37,6 +38,7 @@ public class RangedEnemy : MonoBehaviour
 
         //Finds the player for reference
         playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerHead = GameObject.FindGameObjectWithTag("PlayerHead");
         playerResources = playerObject.GetComponent<PlayerResources>();
 
         //Calls looping shoot function on spawn
@@ -59,7 +61,7 @@ public class RangedEnemy : MonoBehaviour
         }
 
         //Keep facing the player
-        transform.LookAt(playerObject.transform.position);
+        transform.LookAt(playerHead.transform.position);
     }
 
     IEnumerator FireBullet()

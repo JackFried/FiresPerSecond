@@ -17,6 +17,7 @@ TagManager:
   - Heart
   - FinalWin
   - Instakill
+  - PlayerHead
   layers:
   - Default
   - TransparentFX

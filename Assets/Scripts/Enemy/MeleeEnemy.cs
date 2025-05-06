@@ -19,6 +19,7 @@ public class MeleeEnemy : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
 
     private GameObject playerObject;
+    private GameObject playerHead;
     private PlayerResources playerResources;
 
     [SerializeField] private GameObject destroyEffect;
@@ -37,6 +38,7 @@ public class MeleeEnemy : MonoBehaviour
 
         //Finds the player for reference
         playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerHead = GameObject.FindGameObjectWithTag("PlayerHead");
         playerResources = playerObject.GetComponent<PlayerResources>();
     }
 
@@ -57,10 +59,10 @@ public class MeleeEnemy : MonoBehaviour
         else
         {
             //Track the player
-            agent.SetDestination(playerObject.transform.position);
+            agent.SetDestination(playerHead.transform.position);
         }
 
         //Keep facing the player
-        transform.LookAt(playerObject.transform.position);
+        transform.LookAt(playerHead.transform.position);
     }
 }

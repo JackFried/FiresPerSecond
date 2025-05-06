@@ -52,9 +52,11 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerResources playerResources;
 
+    private Vector2 playerInputGlobal;
     
 
     public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
+    public Vector2 PlayerInputGlobal { get => playerInputGlobal; set => playerInputGlobal = value; }
 
 
     /// <summary>
@@ -86,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(InputValue iValue)
     {
         Vector2 inputMovementValue = iValue.Get<Vector2>(); //Reads the input value
+        PlayerInputGlobal = inputMovementValue; //Allows the input the be read outside of this script
 
         //X and Y input are applied to player X and Z
         playerMovement.x = inputMovementValue.x;

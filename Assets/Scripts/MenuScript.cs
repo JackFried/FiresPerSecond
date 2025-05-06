@@ -6,6 +6,8 @@
 // Brief Description : Generic controller script for all menuing.
 *****************************************************************************/
 
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +15,14 @@ public class MenuScript : MonoBehaviour
 {
     //Setting variables
     [SerializeField] private bool isMainMenu;
+
+    //Used by the level select screen to load records
+    [SerializeField] private bool loadSaveData;
+    [SerializeField] private TMP_Text Stage1RecordText;
+    [SerializeField] private TMP_Text Stage2RecordText;
+    [SerializeField] private TMP_Text Stage3RecordText;
+
+
     [SerializeField] private bool cursorVisible;
 
     [SerializeField] private string thisLevel;
@@ -40,6 +50,11 @@ public class MenuScript : MonoBehaviour
             persistentData = dataObject.GetComponent<PersistentData>();
 
             thisLevel = persistentData.CurrentLevel;
+        }
+
+        if (loadSaveData == true)
+        {
+            LoadTimes();
         }
     }
 
@@ -81,5 +96,32 @@ public class MenuScript : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    /// <summary>
+    /// Retrieves stage record times and displays them (for the level select screen only)
+    /// </summary>
+    private void LoadTimes()
+    {
+        //Gets the record
+        float stage1LoadedTime = PlayerPrefs.GetFloat("Stage1Time");
+        //Returns a time interval in seconds
+        TimeSpan time1 = TimeSpan.FromSeconds(stage1LoadedTime);
+        //Formats time variable into specified string structure
+        Stage1RecordText.text = time1.ToString(@"mm\:ss\:ff");
+
+        //Gets the record
+        float stage2LoadedTime = PlayerPrefs.GetFloat("Stage2Time");
+        //Returns a time interval in seconds
+        TimeSpan time2 = TimeSpan.FromSeconds(stage2LoadedTime);
+        //Formats time variable into specified string structure
+        Stage2RecordText.text = time2.ToString(@"mm\:ss\:ff");
+
+        //Gets the record
+        float stage3LoadedTime = PlayerPrefs.GetFloat("Stage3Time");
+        //Returns a time interval in seconds
+        TimeSpan time3 = TimeSpan.FromSeconds(stage3LoadedTime);
+        //Formats time variable into specified string structure
+        Stage3RecordText.text = time3.ToString(@"mm\:ss\:ff");
     }
 }

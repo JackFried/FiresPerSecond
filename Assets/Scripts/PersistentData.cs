@@ -17,6 +17,7 @@ public class PersistentData : MonoBehaviour
     [SerializeField] private PersistentData Instance;
 
     private GameObject timer;
+    private int currentLevelInt;
 
     [SerializeField] private string currentLevel;
 
@@ -25,6 +26,7 @@ public class PersistentData : MonoBehaviour
     public float BestTime { get => bestTime; set => bestTime = value; }
     public string CurrentLevel { get => currentLevel; set => currentLevel = value; }
     public bool CanDelete { get => canDelete; set => canDelete = value; }
+    public int CurrentLevelInt { get => currentLevelInt; set => currentLevelInt = value; }
 
 
     /// <summary>
@@ -63,6 +65,20 @@ public class PersistentData : MonoBehaviour
 
             CurrentLevel = SceneManager.GetActiveScene().name;
             BestTime = timerController.CurrentTime;
+
+            //Getting level number
+            if (SceneManager.GetActiveScene().name == "Level1")
+            {
+                CurrentLevelInt = 1;
+            }
+            else if (SceneManager.GetActiveScene().name == "Level2")
+            {
+                CurrentLevelInt = 2;
+            }
+            else if (SceneManager.GetActiveScene().name == "Level3")
+            {
+                CurrentLevelInt = 3;
+            }
         }
         else //If outside of the levels scenes, destroy self
         {
