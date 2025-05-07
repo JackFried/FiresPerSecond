@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip healSfx;
 
     private GameObject overlay;
-    private PauseMenu pauseMenu;
+    private PauseMenu pauseMenuObj;
 
     private PlayerResources playerResources;
 
@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
     public Vector2 PlayerInputGlobal { get => playerInputGlobal; set => playerInputGlobal = value; }
     public Vector3 PlayerMovementVar { get => playerMovementVar; set => playerMovementVar = value; }
+    public PauseMenu PauseMenuObj { get => pauseMenuObj; set => pauseMenuObj = value; }
 
 
     /// <summary>
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Finds the pause menu script through the HUD object
         overlay = GameObject.FindGameObjectWithTag("HUD");
-        pauseMenu = overlay.GetComponent<PauseMenu>();
+        PauseMenuObj = overlay.GetComponent<PauseMenu>();
 
         //Sets the starting FOV
         initialFov = mainCamera.fieldOfView;
@@ -141,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
             canJump = true; //When on the ground, also reset the jump
 
 
-            if (pauseMenu.IsPaused == false)
+            if (PauseMenuObj.IsPaused == false)
             {
                 //FOV stuff (grounded)
                 //If FOV is above the initial value, rapidly decrease it based on the over-time speed
@@ -163,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
             canJump = false; //When off the ground, disable jumping
 
 
-            if (pauseMenu.IsPaused == false)
+            if (PauseMenuObj.IsPaused == false)
             {
                 //FOV stuff (mid-air)
                 //Calculates total current horizontal magnitude, used as a modifier for FOV change

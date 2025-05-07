@@ -2758,6 +2758,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 3368181224690132841}
   pauseScreen: {fileID: 6116484184580324287}
+  pauseSound: {fileID: 8300000, guid: 2000f5b805435064d9d89357dae3dd30, type: 3}
+  unpauseSound: {fileID: 8300000, guid: 55f90034b8407184faa838f12e786a1f, type: 3}
 --- !u!114 &2075570702919689578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2771,5 +2773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMainMenu: 0
+  loadSaveData: 0
+  Stage1RecordText: {fileID: 0}
+  Stage2RecordText: {fileID: 0}
+  Stage3RecordText: {fileID: 0}
   cursorVisible: 0
   thisLevel: 

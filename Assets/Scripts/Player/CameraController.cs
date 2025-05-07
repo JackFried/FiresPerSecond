@@ -108,41 +108,44 @@ public class CameraController : MonoBehaviour
         yRotation += currentXIn;
         xRotation -= currentYIn;
 
-        //Controls the tilt of the camera (based on left and right player movement)
-        if (playerMovement.PlayerMovementVar.x != 0)
+        //Controls the tilt of the camera (based on left and right player movement; only while the game is unpaused)
+        if (playerMovement.PauseMenuObj.IsPaused == false)
         {
-            if (playerMovement.PlayerMovementVar.x < 0) //If moving left, tilt left
+            if (playerMovement.PlayerMovementVar.x != 0)
             {
-                if (zRotation > -zRotMax)
+                if (playerMovement.PlayerMovementVar.x < 0) //If moving left, tilt left
                 {
-                    zRotation -= zRotSpeed;
+                    if (zRotation > -zRotMax)
+                    {
+                        zRotation -= zRotSpeed;
+                    }
+                    else
+                    {
+                        zRotation = -zRotMax;
+                    }
                 }
-                else
+                else if (playerMovement.PlayerMovementVar.x > 0) //If moving right, tilt right
                 {
-                    zRotation = -zRotMax;
+                    if (zRotation < zRotMax)
+                    {
+                        zRotation += zRotSpeed;
+                    }
+                    else
+                    {
+                        zRotation = zRotMax;
+                    }
                 }
             }
-            else if (playerMovement.PlayerMovementVar.x > 0) //If moving right, tilt right
+            else //If not moving left or right, tilt back to the default rotation
             {
-                if (zRotation < zRotMax)
+                if (zRotation < 0)
                 {
                     zRotation += zRotSpeed;
                 }
-                else
+                else if (zRotation > 0)
                 {
-                    zRotation = zRotMax;
+                    zRotation -= zRotSpeed;
                 }
-            }
-        }
-        else //If not moving left or right, tilt back to the default rotation
-        {
-            if (zRotation < 0)
-            {
-                zRotation += zRotSpeed;
-            }
-            else if (zRotation > 0)
-            {
-                zRotation -= zRotSpeed;
             }
         }
 

@@ -15,9 +15,12 @@ public class PauseMenu : MonoBehaviour
     //Setting Variables
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private AudioClip pauseSound;
+    [SerializeField] private AudioClip unpauseSound;
     private bool isPaused;
 
     private GameObject persistentData;
+    private GameObject playerObject;
 
     public bool IsPaused { get => isPaused; set => isPaused = value; }
 
@@ -32,6 +35,9 @@ public class PauseMenu : MonoBehaviour
 
         //Find persistent data object
         persistentData = GameObject.FindGameObjectWithTag("PersistentData");
+
+        //Finds the player for reference
+        playerObject = GameObject.FindGameObjectWithTag("Player");
     }
 
 
@@ -51,6 +57,8 @@ public class PauseMenu : MonoBehaviour
     {
         if (IsPaused == false)
         {
+            AudioSource.PlayClipAtPoint(pauseSound, playerObject.transform.position, 1f);
+
             //Make the pause screen appear and stop the game from running
             pauseScreen.SetActive(true);
             IsPaused = true;
@@ -70,6 +78,8 @@ public class PauseMenu : MonoBehaviour
             //Locks the cursor to the middle of the screen and hides it
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            AudioSource.PlayClipAtPoint(unpauseSound, playerObject.transform.position, 1f);
         }
     }
 
