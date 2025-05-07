@@ -19,9 +19,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody rb;
-    private Vector3 playerMovement;
+    private Vector3 playerMovementVar;
     private Vector3 moveDir;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera backCamera;
 
     //Drag-related variables
     [SerializeField] private float playerHeight;
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
     public Vector2 PlayerInputGlobal { get => playerInputGlobal; set => playerInputGlobal = value; }
+    public Vector3 PlayerMovementVar { get => playerMovementVar; set => playerMovementVar = value; }
 
 
     /// <summary>
@@ -91,8 +93,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerInputGlobal = inputMovementValue; //Allows the input the be read outside of this script
 
         //X and Y input are applied to player X and Z
-        playerMovement.x = inputMovementValue.x;
-        playerMovement.z = inputMovementValue.y;
+        playerMovementVar.x = inputMovementValue.x;
+        playerMovementVar.z = inputMovementValue.y;
     }
 
     /// <summary>
@@ -122,8 +124,11 @@ public class PlayerMovement : MonoBehaviour
     {
         SpeedControl();
 
+        //Match back camera FOV with front camera FOV
+        backCamera.fieldOfView = mainCamera.fieldOfView;
+
         //Calculates movement direction based on the camera's direction
-        moveDir = orientation.forward * playerMovement.z + orientation.right * playerMovement.x;
+        moveDir = orientation.forward * PlayerMovementVar.z + orientation.right * PlayerMovementVar.x;
 
         //Check for ground using raycasting, using half the player's height plus a little more
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);

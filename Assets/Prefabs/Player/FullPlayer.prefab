@@ -197,6 +197,8 @@ MonoBehaviour:
   ySensitivity: 20
   playerOrient: {fileID: 8203696430853354014}
   mouseInput: {fileID: 7450501725798531094}
+  zRotSpeed: 0.01
+  zRotMax: 0.5
   isMainCam: 1
 --- !u!114 &7450501725798531094
 MonoBehaviour:
@@ -348,6 +350,7 @@ MonoBehaviour:
   orientation: {fileID: 8203696430853354014}
   rb: {fileID: 3035365787133985649}
   mainCamera: {fileID: 3782502723074679367}
+  backCamera: {fileID: 3759510190697067873}
   playerHeight: 2
   groundMask:
     serializedVersion: 2
@@ -558,7 +561,7 @@ GameObject:
   - component: {fileID: 6359529826495223708}
   m_Layer: 3
   m_Name: BackCamera
-  m_TagString: Untagged
+  m_TagString: BackCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -645,6 +648,8 @@ MonoBehaviour:
   ySensitivity: 20
   playerOrient: {fileID: 8203696430853354014}
   mouseInput: {fileID: 7450501725798531094}
+  zRotSpeed: 0.01
+  zRotMax: 0.5
   isMainCam: 0
 --- !u!1 &2701992023872185338
 GameObject:

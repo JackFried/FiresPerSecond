@@ -33676,6 +33676,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2035973959527791503, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
+      propertyPath: zSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035973959527791503, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
+      propertyPath: zRotMax
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035973959527791503, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
+      propertyPath: isMainCam
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035973959527791503, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
+      propertyPath: zRotSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 5443753968211289652, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
       propertyPath: m_Name
       value: FullPlayer
@@ -33696,6 +33712,10 @@ PrefabInstance:
       propertyPath: enemyCount
       value: 
       objectReference: {fileID: 206179205697891358}
+    - target: {fileID: 6359529826495223708, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
+      propertyPath: isMainCam
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6670792937736379161, guid: f925147ba8fa1f642a1f5280e715dadc, type: 3}
       propertyPath: m_audioClip
       value: 

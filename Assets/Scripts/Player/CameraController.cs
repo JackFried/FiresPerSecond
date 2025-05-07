@@ -7,10 +7,7 @@
                        vertical clamps.
 *****************************************************************************/
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
@@ -29,7 +26,14 @@ public class CameraController : MonoBehaviour
     private float xRotation;
     private float yRotation;
 
+    private float zRotation;
+    [SerializeField] private float zRotSpeed;
+    [SerializeField] private float zRotMax;
+
     [SerializeField] private bool isMainCam;
+
+    private GameObject playerObject;
+    private PlayerMovement playerMovement;
 
 
     /// <summary>
@@ -46,6 +50,10 @@ public class CameraController : MonoBehaviour
         mouseX.canceled += MouseX_canceled;
         mouseY.started += MouseY_started;
         mouseY.canceled += MouseY_canceled;
+
+        //Finds the player for reference
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
 
         if (isMainCam == true) //Checks if this is the primary camera
         {
@@ -100,20 +108,58 @@ public class CameraController : MonoBehaviour
         yRotation += currentXIn;
         xRotation -= currentYIn;
 
+        //Controls the tilt of the camera (based on left and right player movement)
+        if (playerMovement.PlayerMovementVar.x != 0)
+        {
+            if (playerMovement.PlayerMovementVar.x < 0) //If moving left, tilt left
+            {
+                if (zRotation > -zRotMax)
+                {
+                    zRotation -= zRotSpeed;
+                }
+                else
+                {
+                    zRotation = -zRotMax;
+                }
+            }
+            else if (playerMovement.PlayerMovementVar.x > 0) //If moving right, tilt right
+            {
+                if (zRotation < zRotMax)
+                {
+                    zRotation += zRotSpeed;
+                }
+                else
+                {
+                    zRotation = zRotMax;
+                }
+            }
+        }
+        else //If not moving left or right, tilt back to the default rotation
+        {
+            if (zRotation < 0)
+            {
+                zRotation += zRotSpeed;
+            }
+            else if (zRotation > 0)
+            {
+                zRotation -= zRotSpeed;
+            }
+        }
+
         //Clamps vertical camera angle to stop straight up and straight down
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         if (isMainCam == true) //Checks if this is the primary camera
         {
             //Rotate camera orientation
-            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, zRotation);
             //Rotate player vertical orientation
             playerOrient.rotation = Quaternion.Euler(0, yRotation, 0);
         }
         else
         {
             //Rotate camera orientation (back view)
-            transform.rotation = Quaternion.Euler(xRotation, yRotation + 180, 0);
+            transform.rotation = Quaternion.Euler(xRotation, yRotation + 180, zRotation);
         }
     }
 

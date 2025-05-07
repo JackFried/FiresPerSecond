@@ -18,6 +18,7 @@ TagManager:
   - FinalWin
   - Instakill
   - PlayerHead
+  - BackCamera
   layers:
   - Default
   - TransparentFX
