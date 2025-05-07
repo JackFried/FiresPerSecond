@@ -70,7 +70,7 @@ public class EnemySpawnZone : MonoBehaviour
             {
                 EnableEnemies();
                 StartCoroutine(EnableWalls());
-                AudioSource.PlayClipAtPoint(spawnSfx, other.gameObject.transform.position, 1f);
+                AudioSource.PlayClipAtPoint(spawnSfx, other.gameObject.transform.position, 0.5f);
                 isEnabled = true;
             }
         }
